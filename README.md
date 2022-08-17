@@ -16,7 +16,7 @@ Executable file for Windows will come soon.
 
 ## 3.Cautions
 
-1. This program can only send JSON file and "json.loads" is used to convert string to json data,so you SHOULD **ADD DOUBLE QUOTES** when using strings.
+1. This program can only send JSON file and "json.loads" is used to convert string to json data,so you should **ADD DOUBLE QUOTES** when using strings.
 2. Unicode decode is not available,so you may see "\uxxxx" in received data.Solution may come soon in subsequent versions.
 
 ## 2.versions
