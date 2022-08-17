@@ -61,6 +61,8 @@ class App:
             filetypes=file_type,
             defaultextension=file_type
         )
+        if not path.endswith(".json"):
+            return
         try:
             with open(path,"w") as f:
                 data=self.recvArea.get(1.0,tk.END)
