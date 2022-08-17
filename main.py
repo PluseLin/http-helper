@@ -5,6 +5,8 @@ from http_sender import *
 from tkinter import ttk
 import tkinter.messagebox
 
+from tkinter.filedialog import askopenfilename,asksaveasfilename
+
 font_l=('宋体',20)
 font_m=('宋体',16)
 font_s=('Consolas',12)
@@ -36,6 +38,37 @@ class App:
         else:
             self.recvArea.delete(1.0,tk.END)
             self.recvArea.insert(tk.END,ret[1])
+
+    def selectInputFile_Event(self):
+        file_type=[("json file","*.json")]
+        path=askopenfilename(
+            filetypes=file_type,
+            defaultextension=file_type
+        )
+        try:
+            with open(path,"r") as f:
+                data=json.load(f)
+                data=json.dumps(data)
+        except Exception as e:
+            tkinter.messagebox.showerror(title="error",message="导入失败！请检查文件！")
+            return
+        self.sendArea.delete(1.0,tk.END)
+        self.sendArea.insert(tk.END,data)        
+
+    def selectOutputFile_Event(self):
+        file_type=[("json file","*.json")]
+        path=asksaveasfilename(            
+            filetypes=file_type,
+            defaultextension=file_type
+        )
+        try:
+            with open(path,"w") as f:
+                data=self.recvArea.get(1.0,tk.END)
+                data=json.loads(data)
+                json.dump(data,f)
+        except Exception as e:
+            tkinter.messagebox.showerror(title="error",message="导出失败！请检查文件！")
+            return
 
     def __init__(self):
         #窗口
@@ -104,6 +137,24 @@ class App:
             command=self.send_Event,            
         )
         self.sendButton.place(x=640,y=40,w=120,h=40)
+
+        #选择文件按键
+        self.inputFileButton=tk.Button(
+            master=self.window,
+            font=font_s,
+            text="选择文件",
+            command=self.selectInputFile_Event,            
+        )
+        self.inputFileButton.place(x=160,y=120,w=80,h=30)        
+
+        #保存数据按键
+        self.outputFileButton=tk.Button(
+            master=self.window,
+            font=font_s,
+            text="保存数据",
+            command=self.selectOutputFile_Event,            
+        )
+        self.outputFileButton.place(x=560,y=120,w=80,h=30)   
 
         #下拉列表
         self.selectBox=ttk.Combobox(

@@ -21,4 +21,5 @@ Executable file for Windows will come soon.
 
 ## 2.versions
 
-* v1.0: GET,POST,PUT,DELETE methods
+* v1.0: GET,POST,PUT,DELETE methods.
+* v1.1: Add function that user can select json file for input and dump received data to json files.
