@@ -22,15 +22,20 @@ class App:
     def send_Event(self):
         send_method=self.selectBox.get()
         send_url=self.urlEntry.get()
+        send_func=func_dict[send_method]
         try:
-            send_data=json.loads(self.sendArea.get(1.0,tk.END))
+            data=self.sendArea.get(1.0,tk.END)
+            print(send_method)
+            if send_method=="GET":
+                data="{}"
+            print(data)
+            send_data=json.loads(data)
         except:
             tkinter.messagebox.showerror(title="error",message="发送内容必须是json格式，字符串需要加双引号！")
             return
         if send_url=="":
             tkinter.messagebox.showerror(title="error",message="url不可以为空！")
             return
-        send_func=func_dict[send_method]
         ret=send_func(url=send_url,data=send_data)
         if(ret[0]==False):
             tkinter.messagebox.showerror(title="error",message="发送失败，请检查url是否正确")

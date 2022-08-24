@@ -23,3 +23,4 @@ Executable file for Windows will come soon.
 
 * v1.0: GET,POST,PUT,DELETE methods.
 * v1.1: Add function that user can select json file for input and dump received data to json files.
+* v1.2: Repair the bug that GET method will meet error if send data is None.(That means all GET method cannot carry any json data.)
